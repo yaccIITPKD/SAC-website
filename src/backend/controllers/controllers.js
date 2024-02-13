@@ -2,10 +2,10 @@ const express = require("express");
 
 const router = express.Router();
 
-// where is the database connection ?
+// need to edit the path
 const pool = require("db");
 
-// for fetching
+// :table is the name of the table
 router.get("/:table", async (req, res) => {
 	const table = req.params.table;
 
@@ -13,19 +13,22 @@ router.get("/:table", async (req, res) => {
 		const { rows } = await pool.query(`select * from ${table}`);
 		res.json(rows);
 	} catch (error) {
-		// is console log required
 		res.status(500).json({ message: "Server Error" });
 	}
 });
 
-router.get("/:table/:id_name_in_table/:id", async (req, res) => {
+// :table is the name of the table
+// :id_column_name is the name of column which has the primary key in the table
+// :id is the primary key of the row which we require
+
+router.get("/:table/:id_column_name/:id", async (req, res) => {
 	const table = req.params.table;
-	const id_name_in_table = req.params.id_name_in_table;
+	const id_column_name = req.params.id_column_name;
 	const id_to_fetch = req.params.id;
 
 	try {
 		const { rows } = await pool.query(
-			`select * from ${table} where ${table}.${id_name_in_table} = ${id_to_fetch}`
+			`select * from ${table} where ${table}.${id_column_name} = ${id_to_fetch}`
 		);
 		if (rows.length === 0) {
 			return res.status(404).json({ message: "resource not found" });
