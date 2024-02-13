@@ -1,6 +1,57 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') 
+const {sequelize} =  require('./database.js') ;
+//Announcement
+Announcement = sequelize.define('Announcement', {
+    id :{
+        type : DataTypes.INTEGER ,
+        allowNull : false ,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    title :{
+        type :DataTypes.STRING ,
+         
+    },
+    content :{
+        type :DataTypes.STRING ,
+        
+    },
+    user_id :{
+        type : DataTypes.INTEGER
+    },
+    created_at:{
+        type :DataTypes.DATE ,
+        
+    },
+    updated_at :{
+        type :DataTypes.DATE ,
+        
+    }
 
+});
+
+announcement_attachment  =  sequelize.define('announcement_attachment', {
+    id :{
+        type : DataTypes.INTEGER ,
+        allowNull : false ,
+        primaryKey: true,
+        autoIncrement: true
+    },
+    announcement_id  :{
+        type :DataTypes.INTEGER ,
+        allowNull : false ,
+        
+    },
+    file_name  :{
+        type :DataTypes.STRING ,
+        allowNull : false 
+    },
+    file_path :{
+        type :DataTypes.STRING ,
+        allowNull : false 
+    },
+});
+// Users
 base_profile = sequelize.define('base_profile ', {
     id :{
         type : DataTypes.INTEGER ,
@@ -63,6 +114,8 @@ user  =  sequelize.define('user', {
         allowNull : false 
     }
 });
+
+//  clubs
 council  = sequelize.define('council', {
     id :{
         type : DataTypes.INTEGER ,
@@ -193,6 +246,9 @@ comments = sequelize.define('comments', {
 });
 
 // sequelize.sync()
+Announcement.belongsTo(base_profile, { foreignKey: 'user_id' });
+announcement_attachment.belongsTo(Announcement, { foreignKey: 'id' });
+
 user.belongsTo(base_profile, { foreignKey: 'id' });
 club.belongsTo(base_profile, { foreignKey: 'id' });
 council.belongsTo(user, { foreignKey: 'id' });
@@ -204,5 +260,6 @@ thread.belongsTo(user, { foreignKey: 'id' });
 thread.belongsTo(club, { foreignKey: 'id' });
 comments.belongsTo(club, { foreignKey: 'id' });
 comments.belongsTo(thread, { foreignKey: 'id' });
-sequelize.sync()
-module.exports = {base_profile, user , club ,council,membership ,thread , comments};
+sequelize.sync()   
+
+module.exports = {Announcement, announcement_attachment ,base_profile, user , club ,council,membership ,thread , comments};
