@@ -40,4 +40,5 @@ router.get("/:table/:id_column_name/:id", async (req, res) => {
 	}
 });
 
+// exporting the router
 module.exports = router;
