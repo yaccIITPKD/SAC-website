@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const pool = require('../test/db');
+
 
 router.get('/announcements', async(req, res)=>{
 
