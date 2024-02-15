@@ -10,22 +10,26 @@ Announcement = sequelize.define('Announcement', {
     },
     title :{
         type :DataTypes.STRING ,
-         
+        allowNull : false ,
     },
     content :{
         type :DataTypes.STRING ,
-        
+        allowNull : false ,
     },
     user_id :{
-        type : DataTypes.INTEGER
+        type : DataTypes.INTEGER,
+        allowNull : false ,
     },
     created_at:{
         type :DataTypes.DATE ,
+        defaultValue  : DataTypes.NOW,
+        allowNull : false ,
         
     },
     updated_at :{
         type :DataTypes.DATE ,
-        
+        defaultValue  : DataTypes.NOW ,
+        allowNull : false ,
     }
 
 });
@@ -158,7 +162,7 @@ club = sequelize.define('club', {
         allowNull : false 
     },
     Council  :{
-        type :DataTypes.INTEGER ,
+        type :DataTypes.STRING ,
     }
 
 });
@@ -245,21 +249,41 @@ comments = sequelize.define('comments', {
    
 });
 
-// sequelize.sync()
-Announcement.belongsTo(base_profile, { foreignKey: 'user_id' });
-announcement_attachment.belongsTo(Announcement, { foreignKey: 'id' });
 
-user.belongsTo(base_profile, { foreignKey: 'id' });
+Announcement.belongsTo(user, { foreignKey: 'user_id' });
+user.hasMany(Announcement, { foreignKey: 'user_id' });
+
+Announcement.hasOne(announcement_attachment, { foreignKey: 'announcement_id' });
+announcement_attachment.belongsTo(Announcement, { foreignKey: 'announcement_id' });
+
+base_profile.hasOne(user, { foreignKey: 'base_profile_id' });
+user.belongsTo(base_profile, { foreignKey: 'base_profile_id' });
+
+club.belongsTo(council, { foreignKey: 'name' });
+council.hasMany(club, { foreignKey: 'name' });
+
+council.belongsTo(user, { foreignKey: 'secretary' });
+user.hasOne(council, { foreignKey: 'secretary' });
+
 club.belongsTo(base_profile, { foreignKey: 'id' });
-council.belongsTo(user, { foreignKey: 'id' });
-club.belongsTo(council, { foreignKey: 'id' });
 
-membership.belongsTo(user, { foreignKey: 'id' });
-membership.belongsTo(club, { foreignKey: 'id' });
-thread.belongsTo(user, { foreignKey: 'id' });
-thread.belongsTo(club, { foreignKey: 'id' });
-comments.belongsTo(club, { foreignKey: 'id' });
-comments.belongsTo(thread, { foreignKey: 'id' });
+membership.belongsTo(user, { foreignKey: 'user_id' });
+user.hasMany(membership, { foreignKey: 'user_id' });
+
+membership.belongsTo(club, { foreignKey: 'club_id' });
+club.hasMany(membership, { foreignKey: 'club_id' });
+
+thread.belongsTo(user, { foreignKey: 'user_id' });
+user.hasMany(thread, { foreignKey: 'user_id' });
+
+thread.belongsTo(club, { foreignKey: 'club_id' });
+club.hasMany(thread, { foreignKey: 'club_id' });
+
+comments.belongsTo(thread, { foreignKey: 'thread_id' });
+thread.hasMany(comments, { foreignKey: 'thread_id' });
+
+comments.belongsTo(user, { foreignKey: 'user_id' });
+user.hasMany(comments, { foreignKey: 'user_id' });
 sequelize.sync()   
 
 module.exports = {Announcement, announcement_attachment ,base_profile, user , club ,council,membership ,thread , comments};
