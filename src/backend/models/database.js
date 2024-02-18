@@ -3,6 +3,6 @@ const { Sequelize} = require('sequelize');
 const sequelize = new Sequelize('database', 'postgres', 'password', {
     host: 'localhost',
     dialect:'postgres',
-    port : 4000  //reoplace
+    port : 4000  //replace it by database port
 });
 module.exports = {sequelize}
