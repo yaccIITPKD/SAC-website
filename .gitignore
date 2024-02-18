@@ -128,3 +128,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# practice
+practice/
+src/backend/SAC-website
+src/backend/models
