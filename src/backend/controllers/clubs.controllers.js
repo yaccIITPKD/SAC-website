@@ -2,17 +2,17 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const router = express.Router();
 
-const clubs = require('../models/clubs');
+const {Clubs} = require('../models/Clubs');
 
 // find all attributes from table
-const getAllFromClubs = asyncHandler(async (req, res) => {
-  const userData = await clubs.findAll();
+const fetchAllClubs = asyncHandler(async (req, res) => {
+  const userData = await Clubs.findAll();
   res.json(userData);
 });
 
 // find one attribute from table based on id.
-const fetchOneDataFromAnnouncement async = (req, res) => {
+const fetchClubById async = (req, res) => {
   const id = req.params.id;
-  const userData = await clubs.findByPk(id);
+  const userData = await Clubs.findByPk(id);
   res.json(userData);
 };
