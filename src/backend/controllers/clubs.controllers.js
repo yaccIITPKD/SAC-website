@@ -2,7 +2,7 @@ const express = require('express');
 const asyncHandler = require('express-async-handler');
 const router = express.Router();
 
-const {Clubs} = require('../models/Clubs');
+const {Clubs} = require('../models/clubs');
 
 // find all attributes from table
 const fetchAllClubs = asyncHandler(async (req, res) => {
