@@ -1,8 +1,8 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
-const {base_profile} =  require('./base_profile.js') ;
+const {sequelize} =  require('./Database.js') ;
+const {Base_profile} =  require('./Base_profile.js') ;
 
-user  =  sequelize.define('user', {
+User  =  sequelize.define('User', {
     id :{
         type : DataTypes.INTEGER ,
         allowNull : false ,
@@ -37,7 +37,7 @@ user  =  sequelize.define('user', {
     }
 });
 
-base_profile.hasOne(user, { foreignKey: 'base_profile_id' });
-user.belongsTo(base_profile, { foreignKey: 'base_profile_id' });
+Base_profile.hasOne(User, { foreignKey: 'base_profile_id' });
+User.belongsTo(Base_profile, { foreignKey: 'base_profile_id' });
 
-module.exports = {user};
+module.exports = {User};

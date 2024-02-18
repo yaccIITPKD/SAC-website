@@ -1,9 +1,9 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
-const {council} =  require('./council.js') ;
-const {base_profile} =  require('./base_profile.js') ;
+const {sequelize} =  require('./Database.js') ;
+const {Council} =  require('./Council.js') ;
+const {Base_profile} =  require('./Base_profile.js') ;
 
-club = sequelize.define('club', {
+Club = sequelize.define('Club', {
     id :{
         type : DataTypes.INTEGER ,
         allowNull : false ,
@@ -29,8 +29,8 @@ club = sequelize.define('club', {
 
 });
 
-club.belongsTo(base_profile, { foreignKey: 'id' });
-club.belongsTo(council, { foreignKey: 'name' });
-council.hasMany(club, { foreignKey: 'name' });
+Club.belongsTo(Base_profile, { foreignKey: 'id' });
+Club.belongsTo(Council, { foreignKey: 'name' });
+Council.hasMany(Club, { foreignKey: 'name' });
 
-module.exports = {club };
+module.exports = {Club };

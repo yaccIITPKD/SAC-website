@@ -1,8 +1,8 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
+const {sequelize} =  require('./Database.js') ;
 const {Announcement} =  require('./Announcement.js') ;
 
-announcement_attachment  =  sequelize.define('announcement_attachment', {
+Announcement_attachment  =  sequelize.define('Announcement_attachment', {
     id :{
         type : DataTypes.INTEGER ,
         allowNull : false ,
@@ -24,7 +24,7 @@ announcement_attachment  =  sequelize.define('announcement_attachment', {
     },
 });
 
-announcement_attachment.belongsTo(Announcement, { foreignKey: 'announcement_id' });
-Announcement.hasOne(announcement_attachment, { foreignKey: 'announcement_id' });
+Announcement_attachment.belongsTo(Announcement, { foreignKey: 'announcement_id' });
+Announcement.hasOne(Announcement_attachment, { foreignKey: 'announcement_id' });
 
-module.exports = { announcement_attachment };
+module.exports = { Announcement_attachment };

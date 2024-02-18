@@ -1,9 +1,9 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
-const {user} =  require('./user.js') ;
-const {club} =  require('./club.js') ;
+const {sequelize} =  require('./Database.js') ;
+const {User} =  require('./User.js') ;
+const {Club} =  require('./Club.js') ;
 
-thread = sequelize.define('thread', {
+Thread = sequelize.define('Thread', {
     id :{
         type : DataTypes.INTEGER ,
         allowNull : false ,
@@ -37,10 +37,10 @@ thread = sequelize.define('thread', {
 
 });
 
-thread.belongsTo(user, { foreignKey: 'user_id' });
-user.hasMany(thread, { foreignKey: 'user_id' });
+Thread.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Thread, { foreignKey: 'user_id' });
 
-thread.belongsTo(club, { foreignKey: 'club_id' });
-club.hasMany(thread, { foreignKey: 'club_id' });
+Thread.belongsTo(Club, { foreignKey: 'club_id' });
+Club.hasMany(Thread, { foreignKey: 'club_id' });
 
-module.exports = {thread};
+module.exports = {Thread};

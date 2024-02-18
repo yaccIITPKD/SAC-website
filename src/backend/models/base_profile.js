@@ -1,8 +1,8 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
+const {sequelize} =  require('./Database.js') ;
 
 
-base_profile = sequelize.define('base_profile ', {
+Base_profile = sequelize.define('Base_profile ', {
     id :{
         type : DataTypes.INTEGER ,
         allowNull : false ,
@@ -30,4 +30,4 @@ base_profile = sequelize.define('base_profile ', {
 
 });
 
-module.exports = {base_profile};
+module.exports = {Base_profile};

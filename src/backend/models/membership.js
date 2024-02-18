@@ -1,9 +1,9 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
-const {user} =  require('./user.js') ;
-const {club} =  require('./club.js') ;
+const {sequelize} =  require('./Database.js') ;
+const {User} =  require('./User.js') ;
+const {Club} =  require('./Club.js') ;
 
-membership =  sequelize.define('membership', {
+Membership =  sequelize.define('Membership', {
     user_id :{
         type : DataTypes.INTEGER ,
     },
@@ -25,10 +25,10 @@ membership =  sequelize.define('membership', {
 
 });
 
-membership.belongsTo(user, { foreignKey: 'user_id' });
-user.hasMany(membership, { foreignKey: 'user_id' });
+Membership.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Membership, { foreignKey: 'user_id' });
 
-membership.belongsTo(club, { foreignKey: 'club_id' });
-club.hasMany(membership, { foreignKey: 'club_id' });
+Membership.belongsTo(Club, { foreignKey: 'club_id' });
+Club.hasMany(Membership, { foreignKey: 'club_id' });
 
-module.exports = {membership};
+module.exports = {Membership};

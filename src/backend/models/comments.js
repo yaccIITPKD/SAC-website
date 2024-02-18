@@ -1,9 +1,9 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
-const {user} =  require('./user.js') ;
-const {thread} =  require('./thread.js') ;
+const {sequelize} =  require('./Database.js') ;
+const {User} =  require('./User.js') ;
+const {Thread} =  require('./thread.js') ;
 
-comments = sequelize.define('comments', {
+Comments = sequelize.define('Comments', {
     id :{
         type : DataTypes.INTEGER ,
         allowNull : false ,
@@ -29,10 +29,10 @@ comments = sequelize.define('comments', {
    
 });
 
-comments.belongsTo(thread, { foreignKey: 'thread_id' });
-thread.hasMany(comments, { foreignKey: 'thread_id' });
+Comments.belongsTo(Thread, { foreignKey: 'thread_id' });
+Thread.hasMany(Comments, { foreignKey: 'thread_id' });
 
-comments.belongsTo(user, { foreignKey: 'user_id' });
-user.hasMany(comments, { foreignKey: 'user_id' });
+Comments.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Comments, { foreignKey: 'user_id' });
 
-module.exports = { comments};
+module.exports = { Comments};

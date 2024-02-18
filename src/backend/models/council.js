@@ -1,8 +1,8 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
-const {user} =  require('./user.js') ;
+const {sequelize} =  require('./Database.js') ;
+const {User} =  require('./User.js') ;
 
-council  = sequelize.define('council', {
+Council  = sequelize.define('Council', {
     id :{
         type : DataTypes.INTEGER ,
         allowNull : false ,
@@ -24,7 +24,7 @@ council  = sequelize.define('council', {
     },
 });
 
-council.belongsTo(user, { foreignKey: 'secretary' });
-user.hasOne(council, { foreignKey: 'secretary' });
+Council.belongsTo(User, { foreignKey: 'secretary' });
+User.hasOne(Council, { foreignKey: 'secretary' });
 
-module.exports = {council};
+module.exports = {Council};

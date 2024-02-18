@@ -1,6 +1,6 @@
 const {  DataTypes  } = require('sequelize');
-const {sequelize} =  require('./database.js') ;
-const {user} =  require('./user.js') ;
+const {sequelize} =  require('./Database.js') ;
+const {User} =  require('./User.js') ;
 
 //Announcement
 Announcement = sequelize.define('Announcement', {
@@ -36,7 +36,7 @@ Announcement = sequelize.define('Announcement', {
 
 });
 
-Announcement.belongsTo(user, { foreignKey: 'user_id' });
-user.hasMany(Announcement, { foreignKey: 'user_id' });
+Announcement.belongsTo(User, { foreignKey: 'user_id' });
+User.hasMany(Announcement, { foreignKey: 'user_id' });
 
 module.exports = {Announcement};
