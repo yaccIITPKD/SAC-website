@@ -5,9 +5,9 @@ const express = require('express');
 const router = express.Router();
 
 const Announcement = require('../models/announcement');
-const User = require('../models/user');
-const Clubs = require('../models/clubs');
-const Threads = require('../models/threads');
+// const User = require('../models/user');
+// jconst Clubs = require('../models/clubs');
+// const Threads = require('../models/threads');
 
 // we can pass one of the above reqs as req in the functions. 
 // this is fetchAll of Announcement. 
