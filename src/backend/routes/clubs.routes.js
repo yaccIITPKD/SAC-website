@@ -1,12 +1,13 @@
-const express = require('express');
-const router =  express.Router();
+const express = require("express");
+const router = express.Router();
 
-
-const { fetchAllClubs, fetchClubId } = require("../controllers/clubs.controllers")
+const {
+  fetchAllClubs,
+  fetchClubById,
+} = require("../controllers/clubs.controllers");
 
 router.route("/").get(fetchAllClubs);
 
-router.route("/:id").get(fetchClubId);
-
+router.route("/:id").get(fetchClubById);
 
 module.exports = router;
