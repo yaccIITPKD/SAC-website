@@ -1,5 +1,5 @@
 const asyncHandler = require("express-async-handler");
-const { deleteMembershipByClub_Id } = require("./membership.controllers");
+const { deleteMembershipByClub_Id } = require("./memberships.controllers");
 const { deleteThreadByClub_Id } = require("./threads.controllers");
 const { Club } = require("../models/club");
 
