@@ -1,5 +1,9 @@
 const asyncHandler = require("express-async-handler");
 const { User } = require("../models/user");
+const { deleteCouncilByUser_Id } = require("./council.controllers");
+const { deleteMembershipByUser_Id } = require("./memberships.controllers");
+const { deleteThreadByUser_Id } = require("./threads.controllers");
+const { deleteCommentByUser_Id } = require("./comments.controllers");
 
 // to fetch all rows from users
 const fetchAllUsers = asyncHandler(async (req, res) => {
@@ -56,5 +60,33 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 });
 
+const deleteUserById = asyncHandler(async(req,res)=>{
+  const user_id = req.params.id ;
+  try{
+    deleteCouncilByUser_Id(req,res) ;
+    deleteMembershipByUser_Id(req,res) ;
+    deleteThreadByUser_Id(req,res) ;
+    deleteCommentByUser_Id(req,res) ;
+    await User.destroy({where: {id: user_id}});
+   
+    res.status(200).json({ success: true, message: 'profile deleted successfully'});
+  }
+  catch(error){
+    res.status(500).json({success : false ,message : "error occured"}) ;
+  }
+}) ;
 
-module.exports = { fetchAllUsers, fetchUsersById ,createUser ,createBulkUsers, updateUser };
+const deleteUserByBase_profileId = asyncHandler(async(req,res)=>{
+  const Base_profile_id = req.params.id ;
+  try{
+   
+    await User.destroy({where: {base_profile_id: Base_profile_id}});
+   
+    res.status(200).json({ success: true, message: 'profile deleted successfully'});
+  }
+  catch(error){
+    res.status(500).json({success : false ,message : "error occured"}) ;
+  }
+}) ;
+
+module.exports = { fetchAllUsers, fetchUsersById, createUser ,createBulkUsers, updateUser, deleteUserById, deleteUserByBase_profileId };
