@@ -25,4 +25,12 @@ router.get("/google/callback",
 
 );
 
+router.post('/logout', async (req, res) =>{
+
+  req.session = null;
+  req.logout();
+  res.redirect('/users'); // change it
+
+})
+
 module.exports = router;
