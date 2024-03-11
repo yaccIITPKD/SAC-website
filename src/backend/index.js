@@ -16,7 +16,7 @@ app.use(session({
   secret: 'ASecret Key',
   resave: false,
   saveUninitialized: true,
-  // store: 'NOIdea',
+  // store: 'toanappropriateplace', 
   cookie: {
       maxAge: 3 * 60 * 60 * 24
   }

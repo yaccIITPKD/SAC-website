@@ -4,7 +4,10 @@ const passport = require("passport");
 
 //routes 
 
-const {successRedirect, failureRedirect} = {successRedirect: 'http://localhost:3000/users/', failureRedirect: '/login'};
+const {successRedirect, failureRedirect} = {
+  successRedirect: 'http://localhost:3000/users/', 
+  failureRedirect: '/login'
+};
 
 router.get('/google', 
   
