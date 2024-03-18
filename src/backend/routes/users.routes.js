@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
+const passport = require("../middlewares/googleauth");
 
 const {
   fetchAllUsers,
   fetchUsersById,
 } = require("../controllers/users.controllers");
+
 
 //routes for fetching all users and user by id
 router.route("/").get(fetchAllUsers);
