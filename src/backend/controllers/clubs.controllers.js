@@ -1,6 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const { deleteMembershipByClub_Id } = require("./memberships.controllers");
 const { deleteThreadByClub_Id } = require("./threads.controllers");
+const { deleteExpenseByClub_Id } = require("./expense.controllers");
+
 const { Club } = require("../models/club");
 
 // find all attributes from table
@@ -58,6 +60,7 @@ const updateClub = asyncHandler(async (req, res) => {
 const deleteClubById = asyncHandler(async(req,res)=>{
   const Club_id = req.params.id ;
   try{
+    deleteExpenseByClub_Id(req,res) ;
     deleteMembershipByClub_Id(req,res) ;
     deleteThreadByClub_Id(req,res) ;
     await Club.destroy({where: {id: Club_id}});
