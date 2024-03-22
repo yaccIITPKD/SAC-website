@@ -6,18 +6,18 @@ const { Expense_attachment } = require("../models/expense_attachment");
 const fetchExpense_AttachmentbyExpense_id = asyncHandler(async (req, res) => {
  
   const Expense_id = req.params.id;
-  const rows = await Expense_attachment.findAll({ where: { expense_id: Expense_id,}});
+  const attachments = await Expense_attachment.findAll({ where: { expense_id: Expense_id,}});
   res.json(rows);
 });
 
 // creating new attachment
 const Insert_expense_attachment = asyncHandler(async(req,res)=>{
-    const obj = req.body ;
+    const newAttachment = req.body ;
     
     try {
-      const expense = await Expense.findByPk(obj.expense_id);
+      const expense = await Expense.findByPk(newAttachment.expense_id);
       if (expense) { // checking if expense id is valid
-        const new_expense_attachement = await Expense_attachment.create(obj); // inserting in table
+        const new_expense_attachement = await Expense_attachment.create(newAttachment); // inserting in table
         res.status(200).json({ success: true, message: 'Expense_attachment inserted successfully'});
       } else {
         
@@ -34,11 +34,11 @@ const Insert_expense_attachment = asyncHandler(async(req,res)=>{
 // updating  attachment
 const edit_Attachment = asyncHandler(async(req,res)=>{
   
-  const obj = req.body ;
+  const updateAttachment = req.body ;
 
   try {
-    const attachment = await Expense_attachment.findByPk(obj.id);
-    const updatedAttachment = await attachment.update(obj);
+    const attachment = await Expense_attachment.findByPk(updateAttachment.id);
+    const updatedAttachmentInfo = await attachment.update(updateAttachment);
     
   } catch (error) {
     
