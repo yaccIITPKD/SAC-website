@@ -31,7 +31,10 @@ User = sequelize.define("User", {
     unique: true,
   },
   role: {
-    type: DataTypes.STRING,
+    type: DataTypes.ENUM({
+      values: [ 'Admin', 'Secretary', 'Club Head', 'Student']
+    }),
+    defaultValue: 'Student',
     allowNull: false,
   },
 });
