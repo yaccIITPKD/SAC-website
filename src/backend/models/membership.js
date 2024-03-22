@@ -16,6 +16,13 @@ Membership = sequelize.define(
       type: DataTypes.DATE,
       defaultValue: DataTypes.NOW,
     },
+    role: {
+      type: DataTypes.ENUM({
+        values: ['Mentor', 'Participant']
+      }),
+      defaultValue: 'Participant',
+      allowNull: false,
+    },
   },
   {
     indexes: [
@@ -25,7 +32,8 @@ Membership = sequelize.define(
         primaryKey: true,
       },
     ],
-  }
+  },
+
 );
 
 Membership.belongsTo(User, { foreignKey: "user_id" });
