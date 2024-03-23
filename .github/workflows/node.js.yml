@@ -24,31 +24,29 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Create Secrets File Action
-      uses: du5rte/create-secrets-file@v1
-      with:
-        secrets: |
-          PGHOST=${{ secrets.PGHOST }}
-          PGDATABASE=${{ secrets.PGDATABASE }}
-          PGUSER=${{ secrets.PGUSER }}
-          PGPASSWORD=${{ secrets.PGPASSWORD }}
-          ENDPOINT_ID=${{ secrets.ENDPOINT_ID }}
-          GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
-          GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
-      # env:
-      #   PGHOST: ${{ secrets.PGHOST }}
-      #   PGDATABASE: ${{ secrets.PGDATABASE }}
-      #   PGUSER: ${{ secrets.PGUSER }}
-      #   PGPASSWORD: ${{ secrets.PGPASSWORD }}
-      #   ENDPOINT_ID: ${{ secrets.ENDPOINT_ID }}
-      #   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-      #   GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         cache-dependency-path: './src/backend/package-lock.json'
+    - name: Add secrets to Node.js environment
+      env:
+        PGHOST: ${{ secrets.PGHOST }}
+        PGDATABASE: ${{ secrets.PGDATABASE }}
+        PGUSER: ${{ secrets.PGUSER }}
+        PGPASSWORD: ${{ secrets.PGPASSWORD }}
+        ENDPOINT_ID: ${{ secrets.ENDPOINT_ID }}
+        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      run: |
+        echo "PGHOST=$PGHOST" >> .env
+        echo "PGDATABASE=$PGDATABASE" >> .env
+        echo "PGUSER=$PGUSER" >> .env
+        echo "PGPASSWORD=$PGPASSWORD" >> .env
+        echo "ENDPOINT_ID=$ENDPOINT_ID" >> .env
+        echo "GOOGLE_CLIENT_ID=$GOOGLE_CLIENT_ID" >> .env
+        echo "GOOGLE_CLIENT_SECRET=$GOOGLE_CLIENT_SECRET" >> .env
     - run: npm ci
     - run: npm start
     # - run: npm test
