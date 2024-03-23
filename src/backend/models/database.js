@@ -3,14 +3,14 @@ const { Sequelize } = require("sequelize");
 
 let { PGHOST, PGDATABASE, PGUSER, PGPASSWORD, ENDPOINT_ID } = process.env;
 
-const sequelize = new Sequelize('SAC', 'postgres', '786923', {
-  host: 'localhost',
+const sequelize = new Sequelize(PGDATABASE, PGUSER, PGPASSWORD, {
+  host: PGHOST,
   dialect: "postgres",
   port: 5432,
-  // dialectOptions: {
-  //   ssl: {
-  //     require: true
-  //   },
-  // },
+  dialectOptions: {
+    ssl: {
+      require: true
+    },
+  },
 });
 module.exports = { sequelize };
