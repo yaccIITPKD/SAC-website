@@ -50,15 +50,8 @@ jobs:
     - run: npm ci
     - name: Test npm run with timeout
       run: |
-        timeout 60s npm run start || exit 1
+        timeout --preserve-status 60s npm run start
       env:
         CI: true
-    - name: Check npm run status
-      run: |
-        if [ ${{ job.status }} == 'success' ]; then
-          echo "No build errors"
-        else
-          echo "project failed to build!"
-        fi
     # - run: npm start
     # - run: npm test
