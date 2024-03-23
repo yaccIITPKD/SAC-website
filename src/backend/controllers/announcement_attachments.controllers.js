@@ -41,7 +41,7 @@ const createAnnouncement_attachment = asyncHandler(async (req, res) => {
     }
   });
 
-const { Announcement_attachment } = require("../models/Announcement_attachment");
+const { Announcement_attachment } = require("../models/announcement_attachment");
 
 
 const deleteAnnouncement_attachmentById = asyncHandler(async(req,res)=>{
