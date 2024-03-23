@@ -50,15 +50,15 @@ jobs:
     - run: npm ci
     - name: Test npm run with timeout
       run: |
-        timeout 30s npm run start || true
+        timeout 60s npm run start || exit 1
       env:
         CI: true
     - name: Check npm run status
       run: |
         if [ ${{ job.status }} == 'success' ]; then
-          echo "npm run test completed successfully within 30 seconds"
+          echo "No build errors"
         else
-          echo "npm run test timed out after 30 seconds, but not considered a failure"
+          echo "project failed to build!"
         fi
     # - run: npm start
     # - run: npm test
