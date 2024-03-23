@@ -1,7 +1,7 @@
 const passport = require("passport");
 const { User } = require("../models/user");
 const { AuthUser } = require("../controllers/auth.controllers");
-const GoogleStrategy = require("passport-google-oauth20").Strategy;
+const GoogleStrategy = require("passport-google-oauth3").Strategy;
 
 const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET } = process.env;
 const callbackURL = "http://localhost:3000/auth/google/callback";
