@@ -24,16 +24,27 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Create Secrets File Action
+      uses: du5rte/create-secrets-file@v1
+      with:
+        secrets: |
+          PGHOST=${{ secrets.PGHOST }}
+          PGDATABASE=${{ secrets.PGDATABASE }}
+          PGUSER=${{ secrets.PGUSER }}
+          PGPASSWORD=${{ secrets.PGPASSWORD }}
+          ENDPOINT_ID=${{ secrets.ENDPOINT_ID }}
+          GOOGLE_CLIENT_ID=${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET=${{ secrets.GOOGLE_CLIENT_SECRET }}
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
-      env:
-        PGHOST: ${{ secrets.PGHOST }}
-        PGDATABASE: ${{ secrets.PGDATABASE }}
-        PGUSER: ${{ secrets.PGUSER }}
-        PGPASSWORD: ${{ secrets.PGPASSWORD }}
-        ENDPOINT_ID: ${{ secrets.ENDPOINT_ID }}
-        GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
-        GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+      # env:
+      #   PGHOST: ${{ secrets.PGHOST }}
+      #   PGDATABASE: ${{ secrets.PGDATABASE }}
+      #   PGUSER: ${{ secrets.PGUSER }}
+      #   PGPASSWORD: ${{ secrets.PGPASSWORD }}
+      #   ENDPOINT_ID: ${{ secrets.ENDPOINT_ID }}
+      #   GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+      #   GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
