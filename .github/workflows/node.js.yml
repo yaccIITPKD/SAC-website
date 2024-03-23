@@ -12,6 +12,7 @@ on:
 jobs:
   build:
 
+    environment: dev
     runs-on: ubuntu-latest
     defaults:
       run:
